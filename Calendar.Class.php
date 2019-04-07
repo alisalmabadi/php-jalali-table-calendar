@@ -16,7 +16,7 @@ class Calendar
 				table {
 				background-color: #EEEEDD;
 				border-width: 0;
-				font-size: 80%
+				font-size: 18px;
 				}
 				
 				td.day {
@@ -27,7 +27,7 @@ class Calendar
 				
 				td.month {
 				border:1px solid #8e8d89; background-color: #1ee4bd;
-				font-size : 9px;
+				font-size : 15px;
 				text-align: center;
 				direction: rtl ;
 				}
@@ -247,18 +247,18 @@ class Calendar
 		$Difference = 0;
 		break;
 	}
-	$this->OutputText = '<table width="252">'."\n";
+	$this->OutputText = '<table width="100%">'."\n";
 	$this->OutputText .= '  <tr>'."\n";
-	$this->OutputText .= '	<td class="month" colspan="7" width="70%">'.$this->ReturnMonthName($jmonth).'&nbsp;&nbsp;'.$jyear.'</td>'."\n";
+	$this->OutputText .= '	<td class="month" colspan="7" width="100%">'.$this->ReturnMonthName($jmonth).'&nbsp;&nbsp;'.$jyear.'</td>'."\n";
 	$this->OutputText .= '  </tr>'."\n";
 	$this->OutputText .= '  <tr>'."\n";
-	$this->OutputText .= '	<td class="month" width="13%">جمعه</td>'."\n";
-	$this->OutputText .= '	<td class="month" width="13%">پنجشنبه</td>'."\n";
-	$this->OutputText .= '	<td class="month" width="15%">چهارشنبه</td>'."\n";
-	$this->OutputText .= '	<td class="month" width="20%">سه شنبه</td>'."\n";
-	$this->OutputText .= '	<td class="month" width="13%">دوشنبه</td>'."\n";
-	$this->OutputText .= '	<td class="month" width="13%">يکشنبه</td>'."\n";
-	$this->OutputText .= '	<td class="month" width="13%">شنبه</td>'."\n";
+	$this->OutputText .= '	<td class="month">جمعه</td>'."\n";
+	$this->OutputText .= '	<td class="month">پنجشنبه</td>'."\n";
+	$this->OutputText .= '	<td class="month">چهارشنبه</td>'."\n";
+	$this->OutputText .= '	<td class="month">سه شنبه</td>'."\n";
+	$this->OutputText .= '	<td class="month">دوشنبه</td>'."\n";
+	$this->OutputText .= '	<td class="month">يکشنبه</td>'."\n";
+	$this->OutputText .= '	<td class="month">شنبه</td>'."\n";
 	$this->OutputText .= '  </tr>'."\n";
 	for ($i=0;$i<6;$i++)
 		{

@@ -1,8 +1,10 @@
+# PHP Jalali table calendar
+
+
 ![Image](https://raw.githubusercontent.com/salis77/php-jalali-table-calendar/master/screenshot.JPG)
 
 
-# PHP Jalali table calendar
-This project is a fork of [This Project!](https://www.phpclasses.org/package/2256-PHP-Generate-persian-month-calendar-in-HTML.html) which is abandoned! now i just want to develop this lovely project ...! :)<br>
+This project is a fork of [This Project!](https://www.phpclasses.org/package/2256-PHP-Generate-persian-month-calendar-in-HTML.html) which is abandoned! now i just want to continue developping this lovely project ...! :)<br>
 A php class which generate jalali calendar in html table,as you know it's so useful in every proejct
 <br>
 hope be helpful!

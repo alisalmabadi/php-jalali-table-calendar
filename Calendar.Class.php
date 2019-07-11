@@ -37,6 +37,24 @@ class Calendar
 				text-align: center;
 				direction: rtl 
 				}
+
+				a{
+					text-decoration:none;
+					color:black;
+				}
+
+				td.day:hover {
+  				  background: #262f34;
+				}
+
+				td.day:hover a{
+  				  color: white;
+				}
+
+
+				td.day {
+  				  transition: all ease-in-out 3s;
+				}
 				</style>
 				";
 		print $Style;
@@ -217,12 +235,18 @@ class Calendar
 	$todaygyear = date("Y");
 	$todaygmonth = date("m");
 	$todaygday = date("d");
+	$staff_id=null;
 	list( $todayjyear, $todayjmonth, $todayjday ) = $this->gregorian_to_jalali($todaygyear, $todaygmonth, $todaygday);
+
+   
+
 	list( $gyear, $gmonth, $gday ) = $this->jalali_to_gregorian($jyear, $jmonth, 1);
 	$FirstDay = mktime(0,0,0,$gmonth,$gday,$gyear);
 	$FirstDayArray = getdate($FirstDay);
 	$DayOfWeek = $FirstDayArray['wday'];
-	
+
+	$current_year_shamsi=$todayjyear;
+
 	switch ($DayOfWeek)
 	{
 		case 0:
@@ -268,45 +292,161 @@ class Calendar
 			if (($jmonth == 12) && ($leap == true)) $DaysInMonth++;
 			$this->OutputText .= '  <tr>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 7  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
+			$tOutput=$Const + 7;
+            $tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+            if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+               					$highlight = 'highlight';
+            	}else{
+                				$highlight = '';
+             	}
+
+		  if (($Const + 7  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+  $Output = $Const + 7;
+   if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)){
+       $this->OutputText .= "class=\" nottoday ct-tooltipss-load tooltipstered  day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">'."\n";
+   }else{
+                 $this->OutputText .= "class=\" ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+
+			//$this->OutputText .= '>'."\n";
 			$Output = $Const + 7;
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 6  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
-			$Output = $Const + 6;
+			$tOutput=$Const + 6;
+			$tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+                 if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+                     $highlight = 'highlight';
+                 }else{
+                     $highlight = '';
+                 }
+
+			  if (($Const + 6  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+                     $Output = $Const + 6;
+             if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)) {
+                 $this->OutputText .= "class=\"nottoday ct-tooltipss-load tooltipstered  day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }else{
+                 $this->OutputText .= "class=\" ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+                 $Output = $Const + 6;
+
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 5  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
-			$Output = $Const + 5;
+			$tOutput=$Const+ 5 ;
+                 $tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+                 if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+                     $highlight = 'highlight';
+                 }else{
+                     $highlight = '';
+                 }
+
+		   if (($Const + 5  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+                     $Output = $Const + 5;
+             if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)) {
+                 $this->OutputText .= "class=\"nottoday ct-tooltipss-load tooltipstered  day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }else{
+                 $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+             $Output = $Const + 5;
+
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 4  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
-			$Output = $Const + 4;
+			$tOutput= $Const+4;
+
+			$tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+                 if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+                     $highlight = 'highlight';
+                 }else{
+                     $highlight = '';
+                 }
+
+			   if (($Const + 4  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+                     $Output = $Const + 4;
+             if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)) {
+                 $this->OutputText .= "class=\"nottoday ct-tooltipss-load tooltipstered  day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }else{
+                 $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+                 $Output = $Const + 4;
+
+
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 3  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
-			$Output = $Const + 3;
+			$tOutput=$Const + 3 ;
+			 $tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+                 if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+                     $highlight = 'highlight';
+                 }else{
+                     $highlight = '';
+                 }
+
+			  if (($Const + 3  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+                     $Output = $Const + 3;
+             if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)) {
+                 $this->OutputText .= "class=\"nottoday ct-tooltipss-load tooltipstered day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }else{
+                 $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+                 $Output = $Const + 3;
+
+
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 2  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
-			$Output = $Const + 2;
+			$tOutput=$Const+2;
+                 $tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+                 if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+                     $highlight = 'highlight';
+                 }else{
+                     $highlight = '';
+                 }
+
+			 if (($Const + 2  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\" ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+                     $Output = $Const + 2;
+             if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)) {
+                 $this->OutputText .= "class=\"nottoday ct-tooltipss-load  tooltipstered  day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }else{
+                 $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+                 $Output = $Const + 2;
+
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '	<td ';
-			if (($Const + 1  == $todayjday) && ($jmonth == $todayjmonth) && ($jyear == $todayjyear)) $this->OutputText .= "class=\"today\""; else $this->OutputText .= "class=\"day\"";
-			$this->OutputText .= '>'."\n";
-			$Output = $Const + 1;
+			$tOutput=$Const+1;
+                 $tdate=$current_year_shamsi.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $tOutput);
+                 if(isset($arr_all_off_day)  &&  in_array($tdate, $arr_all_off_day)) {
+                     $highlight = 'highlight';
+                 }else{
+                     $highlight = '';
+                 }
+
+			if (($Const + 1  == $todayjday) && ($jmonth == $todayjmonth) && ($current_year_shamsi == $todayjyear)) $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date today date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate'"; else
+                     $Output = $Const + 1;
+             if(($Output>0) && ($Output<=$DaysInMonth) && ($Output<$todayjday)) {
+                 $this->OutputText .= "class=\"nottoday ct-tooltipss-load tooltipstered  day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate' ";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }else{
+                 $this->OutputText .= "class=\"ct-tooltipss-load ct-weekday tooltipstered selected_date day date_single RR offsingledate $highlight\" id='$tdate' data-prov_id='$staff_id' data-selected_dates='$tdate' ";
+                 $this->OutputText .= '><a href="javascript:void(0)">' . "\n";
+             }
+                 $Output = $Const + 1;
+
 			if (($Output>0) && ($Output<=$DaysInMonth)) $this->OutputText .= $Output;
 			$this->OutputText .= '	</td>'."\n";
 			$this->OutputText .= '  </tr>'."\n";

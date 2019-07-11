@@ -20,6 +20,8 @@ font-size: 14 px;
 margin-top: 0;
 margin-left: 0
 }
+
+
 </style>
 </head>
 
@@ -53,6 +55,26 @@ $c->SetStyle();
 </tr>
 </table>
 </div>
-
+<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script type="text/javascript">
+	jQuery(document).on("click",".ct-tooltipss-load",function() {
+    var selected_dates = ' :تاریخ مورد نظر <br>'+jQuery(this).data('selected_dates');
+    var datess=selected_dates+'-';
+ bits = datess.split('-').slice(0, -1);
+    if(datess.indexOf('--')>=1 || bits[2]>31 || bits[2]== 00){
+        $(this).removeClass('activetd');
+        $(this).removeClass('ct-weekday');
+    }else {
+        Swal.fire({
+  				position: 'top-end',
+ 				 type: 'success',
+ 				 title: selected_dates,
+  				showConfirmButton: false,
+  				timer: 1500
+				});
+    }
+});
+</script>
 </body>
 </html>

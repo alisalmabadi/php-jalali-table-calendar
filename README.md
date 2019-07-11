@@ -7,6 +7,8 @@
 This project is a fork of [This Project!](https://www.phpclasses.org/package/2256-PHP-Generate-persian-month-calendar-in-HTML.html) which is abandoned! now i just want to continue developping this lovely project ...! :)<br>
 A php class which generate jalali calendar in html table,as you know it's so useful in every proejct
 <br>
+by the lastest edit you can have dates by clicking on the table and the previous days are disabled
+<br>
 hope be helpful!
 
 
@@ -54,7 +56,8 @@ Finished! thats it!
 # Built With
 
 * [jdf](https://jdf.scr.ir/) - used to convert date to jalali by its function
-
+* [JQUERY](https://github.com/jquery/jquery) - used to alert date
+* [sweetalert2](https://github.com/sweetalert2/sweetalert2) - used to alert date by clicking day numbers
 ## Authors
 
 * **Seyyed Ali Salmabadi** - *Initial work* - [Seyyed Ali](https://github.com/salis77/)
